@@ -6,7 +6,6 @@ import { PrismaService } from './Database/prisma.service';
 export class AppService{
   constructor(private prisma:PrismaService){}
   async getTask() { 
-    return this.prisma.task.findMany({
-    })
+    return this.prisma.task.findMany()
   }
 }
