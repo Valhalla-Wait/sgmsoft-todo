@@ -11,11 +11,16 @@ datasource db {
 }
 
 model task {
-  id    Int     @id @default(autoincrement())
-  task String  
-  status taskStatus
+  id    Int     @id @default(autoincrement())  
+  name String
+  description String
+  expires DateTime
+  isCompleted Boolean    @default(false)
+  status TaskStatus      @default(inProgress)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
 }
- enum taskStatus{
+ enum TaskStatus{
   unfulfilled
   inProgress
   complited
