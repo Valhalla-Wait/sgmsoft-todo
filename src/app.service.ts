@@ -1,20 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTaskInput, DeleteTaskInput,UpdateTaskInput } from './app.model';
+import { CreateTaskInput, IDTaskInput,UpdateTaskInput,filterTaskInput } from './app.model';
 import { PrismaService } from './Database/prisma.service';
 
 @Injectable()
 export class AppService{
   constructor(private prisma:PrismaService){}
 
-  async getTask() { 
+  async getTasks() { 
     return this.prisma.task.findMany()
+  }
+
+  async getTask(data: IDTaskInput) { 
+    return this.prisma.task.findUnique({
+      where: data
+    })
+  }
+
+  async filterTask({status}: filterTaskInput) { 
+    return this.prisma.task.findMany({
+      where: {
+        status: status
+      }
+    })
   }
 
   async createTask(data: CreateTaskInput) { 
     return this.prisma.task.create({data})
   }
 
-  async deleteTask(data: DeleteTaskInput) { 
+  async deleteTask(data: IDTaskInput) { 
     return this.prisma.task.delete({
       where: data
     })

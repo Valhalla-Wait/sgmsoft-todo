@@ -41,9 +41,15 @@ export class CreateTaskInput {
 }
 
 @InputType()
-export class DeleteTaskInput {
+export class IDTaskInput {
     @Field()
     id: number
+}
+
+@InputType()
+export class filterTaskInput {
+  @Field(type => TaskStatus)
+   status:TaskStatus
 }
 
 @InputType()
