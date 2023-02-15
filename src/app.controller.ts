@@ -8,6 +8,6 @@ export class AppController {
   
   @Get("/api")
   getTask() {
-    return this.appService.getTask();
+    return this.appService.getTasks();
   }
 }

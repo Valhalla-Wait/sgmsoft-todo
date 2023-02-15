@@ -13,11 +13,19 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input IDTaskInput {
+  id: Float!
+}
+
 type Mutation {
   createTask(createTaskData: CreateTaskInput!): Task!
+  deleteTask(deleteTaskData: IDTaskInput!): Task!
+  updateTask(updateTaskData: UpdateTaskInput!): Task!
 }
 
 type Query {
+  filterTask(filterData: filterTaskInput!): [Task!]!
+  getTask(IDTaskData: IDTaskInput!): Task!
   getTasks: [Task!]!
 }
 
@@ -28,6 +36,24 @@ type Task {
   id: ID!
   isCompleted: Boolean!
   name: String!
-  status: String!
+  status: TaskStatus!
   updatedAt: DateTime!
+}
+
+enum TaskStatus {
+  complited
+  inProgress
+  unfulfilled
+}
+
+input UpdateTaskInput {
+  description: String!
+  expires: DateTime!
+  id: Float!
+  name: String!
+  status: TaskStatus!
+}
+
+input filterTaskInput {
+  status: TaskStatus!
 }
