@@ -16,5 +16,5 @@ COPY --from=builder /build/node_modules node_modules/
 COPY --from=builder /build/dist dist/
 COPY --from=builder /build/prisma ./prisma
 RUN corepack enable pnpm
-EXPOSE 8080
-CMD ["pnpm", "start:migrate:prod"]
+EXPOSE 5000
+CMD ["npx", "prisma", "migrate", "deploy", "&&", "pnpm", "run", "start:prod"]
