@@ -5,10 +5,10 @@ services:
     build:
       context: .
     env_file:
-      - .env
+      - .prod.env
     ports:
       - 5000:5000
-    command: npx prisma migrate deploy && pnpm run start:prod
+    command: pnpm run start:prod
     depends_on:
       - postgres
     restart: always
